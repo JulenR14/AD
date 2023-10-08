@@ -11,7 +11,7 @@ public class Funko {
 
     //Atributos
     private String codigo, nombre, modelo;
-    private Double precio;
+    private float precio;
     private LocalDate fecha;
 
     //contructores
@@ -22,7 +22,7 @@ public class Funko {
         this.codigo = lista.get(0);
         this.nombre = lista.get(1);
         this.modelo = lista.get(2);
-        this.precio = Double.parseDouble(lista.get(3));
+        this.precio = Float.parseFloat(lista.get(3));
         this.fecha = LocalDate.parse(lista.get(4));
 
     }
@@ -40,7 +40,7 @@ public class Funko {
         return modelo;
     }
 
-    public Double getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
