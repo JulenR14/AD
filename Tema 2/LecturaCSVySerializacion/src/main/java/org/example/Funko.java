@@ -9,9 +9,13 @@ import java.util.List;
 
 public class Funko {
 
+    //Atributos
     private String codigo, nombre, modelo;
     private Double precio;
     private LocalDate fecha;
+
+    //contructores
+    public Funko(){}
 
     public Funko(List<String> lista){
 
@@ -23,6 +27,7 @@ public class Funko {
 
     }
 
+    //geters y seters
     public String getCodigo() {
         return codigo;
     }
