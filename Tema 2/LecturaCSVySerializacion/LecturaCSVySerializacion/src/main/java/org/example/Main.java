@@ -41,7 +41,9 @@ public class Main {
     //metodo que devuelve el funko mas caro
     public static Funko funkoMasCaro(List<Funko> listaFunkos){
         //ordena de menor a mayor los funkos por precio, los convierte en una lista y devuelve el funko en la ultima posicion de la lista ordenada
-        return listaFunkos.stream().sorted(Comparator.comparing(Funko::getPrecio)).toList().get(listaFunkos.size()-1);
+        return listaFunkos.stream().sorted(Comparator.comparing(Funko::getPrecio))
+                .toList()
+                .get(listaFunkos.size()-1);
     }
 
     //metodo que devuelve la media de los precios de Funkos
@@ -52,7 +54,7 @@ public class Main {
         total = listaFunkos.stream().mapToDouble(Funko::getPrecio).sum();
 
         //devolvemos la division entre el total y la cantidad de funkos de la lista
-        return total/listaFunkos.size();
+        return (double)(Math.round(total/listaFunkos.size()*100)/100);
     }
 
     //metodo que agrupa todos los Funkos por modelos
@@ -61,7 +63,8 @@ public class Main {
         //HashMap donde almacenamremos los Funkos
         HashMap<String, List<Funko>> agrupadosPorModelos = new HashMap<String, List<Funko>>();
         //agrupamos por el modelo la lista que nos pasan por parametro, y los recorremos para ir añadiendolos a el HashMap
-        listaFunkos.stream().collect(Collectors.groupingBy(Funko::getModelo)).forEach((k,v)->agrupadosPorModelos.put(k, v.stream().toList()));
+        listaFunkos.stream().collect(Collectors.groupingBy(Funko::getModelo))
+                .forEach((k,v)->agrupadosPorModelos.put(k, v.stream().toList()));
         //imprimimos el HashMap
         return agrupadosPorModelos;
     }
@@ -69,7 +72,8 @@ public class Main {
     //metodo que muestra el numero de funkos que tiene cada modelo de funko
     public static void numeroFunkosPorModelos(List<Funko> listaFunkos){
         //agrupamos la lista por el modelo de cada funko, y realizamos un bucle para mostrar por cada modelo su cantidad de funkos
-        listaFunkos.stream().collect(Collectors.groupingBy(Funko::getModelo)).forEach((k,v) -> System.out.println(k + " : " + v.size()));
+        listaFunkos.stream().collect(Collectors.groupingBy(Funko::getModelo))
+                .forEach((k,v) -> System.out.println(k + " : " + v.size()));
     }
 
     //metodo que devuelve la cantidad de funkos lanzados en 2023
