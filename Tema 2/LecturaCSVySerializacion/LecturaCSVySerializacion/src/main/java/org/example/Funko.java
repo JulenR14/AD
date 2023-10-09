@@ -27,6 +27,17 @@ public class Funko {
 
     }
 
+    @Override
+    public String toString() {
+        return "Funko{" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", precio=" + precio +
+                ", fecha=" + fecha +
+                "}\n";
+    }
+
     //geters y seters
     public String getCodigo() {
         return codigo;
