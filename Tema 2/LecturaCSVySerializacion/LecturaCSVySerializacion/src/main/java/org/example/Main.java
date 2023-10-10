@@ -21,8 +21,10 @@ public class Main {
             //Creamos una lista de objetos funko segun la informacion del anterior Stream, del que hemos sacado la informacion de funkos.csv
             List<Funko> funkos = coleccionFunkos.map(l -> Arrays.asList(l.split(COMMA_DELIMITER))).skip(1).map(Funko::new).toList();
 
-            //llamo al metodo que me devolvera el funko mas caro
-            System.out.println("PUNTO 1 -- El funko mas caro es : " + funkoMasCaro(funkos).getNombre());
+            //llamo al metodo que me devolvera el funko mas caro, compruebo si tiene valor, si tiene imprime el nombre
+            //si no, imprime que no funciona
+            funkoMasCaro(funkos).ifPresentOrElse(f -> System.out.println("PUNTO 1 -- El funko mas caro es : " + f.getNombre()),
+                    () -> System.out.println("No funciona"));
             //llamo al metodo que devuelve la media de los precios de Funkos, y lo redondeamos a dos decimales con Math.random()
             System.out.println("PUNTO 2 -- La media de los precios de los Funkos es : " + (double)Math.round(mediaPrecioFunkos(funkos)*100)/100);
             //llamo al metodo que devuelve los Funkos agrupados por modelos
@@ -39,11 +41,9 @@ public class Main {
     }
 
     //metodo que devuelve el funko mas caro
-    public static Funko funkoMasCaro(List<Funko> listaFunkos){
+    public static Optional<Funko> funkoMasCaro(List<Funko> listaFunkos){
         //ordena de menor a mayor los funkos por precio, los convierte en una lista y devuelve el funko en la ultima posicion de la lista ordenada
-        return listaFunkos.stream().sorted(Comparator.comparing(Funko::getPrecio))
-                .toList()
-                .get(listaFunkos.size()-1);
+        return listaFunkos.stream().max(Comparator.comparing(Funko::getPrecio));
     }
 
     //metodo que devuelve la media de los precios de Funkos

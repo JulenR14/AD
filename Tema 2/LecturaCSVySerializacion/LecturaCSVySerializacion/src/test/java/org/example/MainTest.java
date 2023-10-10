@@ -2,6 +2,11 @@ package org.example;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.exceptions.base.MockitoException;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,28 +14,33 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class MainTest {
 
-    Funko funkoTestUno, funkoTestDos;
-   List<Funko> funkos = new ArrayList<Funko>();
+    @Mock
+    private Funko funkoTestUno;
+    @Mock
+    private Funko funkoTestDos;
+    @InjectMocks
+    private ArrayList<Funko> funkos;
 
    @Test
    @BeforeEach
    public void iniciar(){
 
        //instanciamos dos funkos para las pruebas, y las añadimos a una lista
-       funkoTestUno = new Funko(Arrays.asList("15884fed", "Julen", "MARVEL", "44.15", "2023-03-01"));
-       funkoTestDos = new Funko(Arrays.asList("15884fed", "Capitan America", "DISNEY", "88.50", "2020-12-08"));
-
-       funkos.add(funkoTestUno);
-       funkos.add(funkoTestDos);
+       when(funkoTestUno.getPrecio()).thenReturn(55f);
+       when(funkoTestDos.getPrecio()).thenReturn(80f);
    }
 
     @Test
     void testFunkoMasCaro() {
+
+        when(funkoTestDos.getNombre()).thenReturn("Pepe");
        //comparamos que sea igual el funko mas caro con el que nos devuelve el metodo
-        assertEquals(funkoTestDos, Main.funkoMasCaro(funkos));
+        assertEquals("Pepe", Main.funkoMasCaro(funkos).get().getNombre());
     }
 
     @Test
