@@ -58,7 +58,7 @@ public class Main {
     }
 
     //metodo que agrupa todos los Funkos por modelos
-    public static Map funkosAgrupadosPorModelos(List<Funko> listaFunkos){
+    public static Map<String, List<Funko>> funkosAgrupadosPorModelos(List<Funko> listaFunkos){
 
         //HashMap donde almacenamremos los Funkos
         HashMap<String, List<Funko>> agrupadosPorModelos = new HashMap<String, List<Funko>>();

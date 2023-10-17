@@ -16,31 +16,28 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class MainTest {
+    Funko funkoTestUno, funkoTestDos;
+    private ArrayList<Funko> funkos = new ArrayList<Funko>();
 
-    @Mock
-    private Funko funkoTestUno;
-    @Mock
-    private Funko funkoTestDos;
-    @InjectMocks
-    private ArrayList<Funko> funkos;
 
    @Test
    @BeforeEach
-   public void iniciar(){
-
+   void iniciar(){
        //instanciamos dos funkos para las pruebas, y las añadimos a una lista
-       when(funkoTestUno.getPrecio()).thenReturn(55f);
-       when(funkoTestDos.getPrecio()).thenReturn(80f);
+       funkoTestUno = new Funko(Arrays.asList("1", "Pepe", "Modelo1", "10", "2023-01-01"));
+       funkoTestDos = new Funko(Arrays.asList("2", "Juan", "Modelo2", "20", "2022-01-01"));
+
+       funkos.add(funkoTestUno);
+       funkos.add(funkoTestDos);
+
    }
 
     @Test
     void testFunkoMasCaro() {
 
-        when(funkoTestDos.getNombre()).thenReturn("Pepe");
        //comparamos que sea igual el funko mas caro con el que nos devuelve el metodo
-        assertEquals("Pepe", Main.funkoMasCaro(funkos).get().getNombre());
+        assertEquals("Juan", Main.funkoMasCaro(funkos).get().getNombre());
     }
 
     @Test
