@@ -1,0 +1,29 @@
+<atletas>
+  <atleta>
+    <nombre>Juan</nombre>
+    <pais>España</pais>
+    <edad>20</edad>
+    <pruebas>
+      <prueba>100m</prueba>
+      <prueba>200m</prueba>
+    </pruebas>
+  </atleta>
+  <atleta>
+    <nombre>Alex</nombre>
+    <pais>Portugal</pais>
+    <edad>30</edad>
+    <pruebas>
+      <prueba>100m</prueba>
+      <prueba>200m</prueba>
+    </pruebas>
+  </atleta>
+  <atleta>
+    <nombre>Charles</nombre>
+    <pais>Irlanda</pais>
+    <edad>40</edad>
+    <pruebas>
+      <prueba>100m</prueba>
+      <prueba>200m</prueba>
+    </pruebas>
+  </atleta>
+</atletas>
