@@ -1,0 +1,25 @@
+[ {
+  "isbn" : "1234",
+  "titulo" : "El Quijote",
+  "autor" : "Cervantes",
+  "numeroPaginas" : 1000,
+  "anyPublicacion" : 1605
+}, {
+  "isbn" : "5678",
+  "titulo" : "El Buscón",
+  "autor" : "Quevedo",
+  "numeroPaginas" : 200,
+  "anyPublicacion" : 1626
+}, {
+  "isbn" : "9012",
+  "titulo" : "La Celestina",
+  "autor" : "Fernando de Rojas",
+  "numeroPaginas" : 300,
+  "anyPublicacion" : 1499
+}, {
+  "isbn" : "3456",
+  "titulo" : "La vida es sueño",
+  "autor" : "Calderón de la Barca",
+  "numeroPaginas" : 400,
+  "anyPublicacion" : 1635
+} ]
