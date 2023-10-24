@@ -16,8 +16,7 @@ import java.util.List;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<Object> locations = new ArrayList<>();
-        Object objetoJson = new Object();
+        List<Location> locations = new ArrayList<>();
 
         URL url  =  new URL("https://rickandmortyapi.com/api/location");
 
@@ -30,8 +29,8 @@ public class Main {
         }
 
         Path ruta = Path.of(url.getPath());
-        objetoJson = MetodosJson.leerArrayObjetoJSON(ruta);
+        locations = MetodosJson.leerArrayObjetoJSON(ruta);
 
-        System.out.println(objetoJson);
+        System.out.println(locations);
     }
 }

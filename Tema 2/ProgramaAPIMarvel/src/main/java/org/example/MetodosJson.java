@@ -11,11 +11,10 @@ import java.util.*;
 
 public class MetodosJson {
 
-    public static Object leerArrayObjetoJSON(Path rutaFichero){
+    public static List<Location> leerArrayObjetoJSON(Path rutaFichero){
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(rutaFichero.toFile(), new TypeReference<>() {
-            });
+            return objectMapper.readValue(rutaFichero.toFile(), new TypeReference<List<Location>>(){});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
