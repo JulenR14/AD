@@ -9,28 +9,27 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Path;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) throws IOException {
+
+
         List<Location> locations = new ArrayList<>();
+        ObjetoAPI obj = MetodosJson.leerArrayObjetoJSONApi();
 
-        URL url  =  new URL("https://rickandmortyapi.com/api/location");
+        locations = obj.getResults();
 
-        HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
 
-        connection.setRequestMethod("GET");
-
-        if(connection.getResponseCode() == 200){
-            System.out.println("Conexion realizada con exito");
-        }
-
-        Path ruta = Path.of(url.getPath());
-        locations = MetodosJson.leerArrayObjetoJSON(ruta);
-
-        System.out.println(locations);
+        System.out.println("Localizaciones que forman parte de la Dimension C-137:");
+        locations.stream().filter(localizacion -> localizacion.getDimension()
+                .equals("Dimension C-137"))
+                .forEach(localizacion -> System.out.println("- Nombre : " + localizacion.getName() + "\n" +
+                                    " - Su creacion ha sido : " + localizacion.getCreated()));
     }
 }
