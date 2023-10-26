@@ -21,10 +21,8 @@ public class Main {
 
 
         List<Location> locations = new ArrayList<>();
-        ObjetoAPI obj = MetodosJson.leerArrayObjetoJSONApi();
 
-        locations = obj.getResults();
-
+        locations = MetodosJson.leerArrayObjetoJSONApi();
 
         System.out.println("Localizaciones que forman parte de la Dimension C-137:");
         locations.stream().filter(localizacion -> localizacion.getDimension()

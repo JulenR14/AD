@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
@@ -16,5 +17,5 @@ public class Location {
     private String dimension;
     private List<String> residents;
     private String url;
-    private String created;
+    private ZonedDateTime created;
 }
