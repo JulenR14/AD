@@ -1,10 +1,12 @@
 package org.example;
 
 import org.example.entities.Actor;
+import org.example.entities.Pelicula;
 import org.example.entities.PeliculaOscarizada;
 import org.example.utils.Utilidades;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -25,6 +27,7 @@ public class Main {
 
         Utilidades.escribirActoresEnJson(Path.of(".", "src", "main", "resources", "salida","actores.json"), listaActores);
 
+        Utilidades.actoresMasJovenesEnGanarUnOscar(listaPeliculas).forEach(System.out::println);
 
     }
 }

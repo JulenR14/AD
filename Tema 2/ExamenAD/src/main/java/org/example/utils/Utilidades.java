@@ -50,7 +50,7 @@ public class Utilidades {
 
         peliculasOscarizadas.forEach(pelicula -> {
             if(!actores.contains(pelicula.getActor())){
-                actores.add(new Actor(pelicula.getActor(), pelicula.getSexo(), pelicula.getAnyo(),
+                actores.add(new Actor(pelicula.getActor(), pelicula.getSexo(), (pelicula.getAnyo()-pelicula.getEdad()),
                         peliculasOscarizadas.stream().filter(p -> p.getActor().equals(pelicula.getActor())).map(p -> new Pelicula(p.getPelicula(), p.getAnyo())).toList()));
             }
         });
@@ -70,10 +70,46 @@ public class Utilidades {
         }
     }
 
-
-
     // 4. actoresConMasdeUnOscar: devuelve una lista de Strings con los nombres de los actores/actrices que hayan ganado más de un Oscar.
+    public static List<Actor> actoresConMasDeUnOscar(List<Actor> actores){
+        List<Actor> actoresConMasDeUnOscar = new ArrayList<>();
+
+        actores.forEach(actor -> {
+            if(actor.getPeliculas().size() > 1){
+                actoresConMasDeUnOscar.add(actor);
+            }
+        });
+
+        return actoresConMasDeUnOscar;
+    }
 
     // 5. actoresMasJovenesEnGanarUnOscar: devuelve una lista de Strings con el actor y la actriz más jóvenes en ganar un Oscar.
+    public static List<String> actoresMasJovenesEnGanarUnOscar(List<PeliculaOscarizada> peliculas){
+        List<String> actoresMasJovenesEnGanarUnOscar = new ArrayList<>();
 
+        String actorMasJoven = peliculas.get(0).getActor();
+        String actrizMasJoven = peliculas.get(0).getActor();
+
+        int edadActorJoven = Integer.MAX_VALUE;
+        int edadActrizJoven = Integer.MAX_VALUE;
+
+        for(int i = 0; i < peliculas.size(); i++){
+            if(peliculas.get(i).getSexo().equals("M")){
+                if(peliculas.get(i).getEdad() < edadActorJoven){
+                    actorMasJoven = peliculas.get(i).getActor();
+                    edadActorJoven = peliculas.get(i).getEdad();
+                }
+            }else{
+                if (peliculas.get(i).getEdad() < edadActrizJoven){
+                    actrizMasJoven = peliculas.get(i).getActor();
+                    edadActrizJoven = peliculas.get(i).getEdad();
+                }
+            }
+        }
+
+        actoresMasJovenesEnGanarUnOscar.add(actorMasJoven);
+        actoresMasJovenesEnGanarUnOscar.add(actrizMasJoven);
+
+        return actoresMasJovenesEnGanarUnOscar;
+    }
 }
