@@ -134,6 +134,23 @@ public class ConectarConBaseDatos {
     }
 
     public static void mostrarClasificacionContructores(){
-        
+        String consultaSQL = "SELECT c.name, SUM(r.points) AS puntos FROM constructors c " +
+                "INNER JOIN drivers d ON c.constructorid = d.constructorid " +
+                "INNER JOIN results r ON d.driverid = r.driverid " +
+                "GROUP BY c.constructorid " +
+                "ORDER BY puntos DESC";
+
+        try(Connection conexion = DriverManager.getConnection("jdbc:sqlite:" + rutaBaseDatos.toString());
+            PreparedStatement consulta = conexion.prepareStatement(consultaSQL);){
+
+            ResultSet resultado = consulta.executeQuery();
+
+            while (resultado.next()){
+                System.out.println(resultado.getString("name") + " " + resultado.getInt("puntos"));
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
