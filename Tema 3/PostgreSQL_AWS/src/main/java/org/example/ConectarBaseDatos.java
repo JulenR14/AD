@@ -9,6 +9,7 @@ public class ConectarBaseDatos {
     static String password = "12345678";
 
     public static void agregarPiloto(Corredor piloto) {
+        System.out.println(piloto.getEquipo().getId());
         try(Connection conexion = DriverManager.getConnection(urlConexion, usuario, password)){
             try{
             //desactivamos la confirmacion automatica
@@ -16,7 +17,8 @@ public class ConectarBaseDatos {
 
             //comprobamos si existe el equipo del piloto y si no existe lo creamos
             Equipo equipoPiloto = piloto.getEquipo();
-            String insertarEquipo = "INSERT INTO constructors (constructorref, name, nationality, url) VALUES (?, ?, ?, ?)";
+            String insertarEquipo = "INSERT INTO constructors (constructorref, name, nationality, url) VALUES (?, ?, ?, ?)" +
+                                    "ON CONFLICT (constructorid) DO NOTHING";
 
             PreparedStatement sentenciaEquipo = conexion.prepareStatement(insertarEquipo, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -57,5 +59,6 @@ public class ConectarBaseDatos {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        System.out.println(piloto.getEquipo().getId());
     }
 }
