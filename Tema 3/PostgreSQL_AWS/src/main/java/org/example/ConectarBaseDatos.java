@@ -1,6 +1,7 @@
 package org.example;
 
 import java.sql.*;
+import java.util.List;
 
 public class ConectarBaseDatos {
 
@@ -8,46 +9,50 @@ public class ConectarBaseDatos {
     static String usuario = "postgres";
     static String password = "12345678";
 
-    public static void agregarPiloto(Corredor piloto) {
-        System.out.println(piloto.getEquipo().getId());
+    public static void agregarPilotos(List<Corredor> pilotos) {
+
         try(Connection conexion = DriverManager.getConnection(urlConexion, usuario, password)){
             try{
             //desactivamos la confirmacion automatica
             conexion.setAutoCommit(false);
 
-            //comprobamos si existe el equipo del piloto y si no existe lo creamos
-            Equipo equipoPiloto = piloto.getEquipo();
-            String insertarEquipo = "INSERT INTO constructors (constructorref, name, nationality, url) VALUES (?, ?, ?, ?)" +
-                                    "ON CONFLICT (constructorid) DO NOTHING";
+                for (Corredor piloto : pilotos) {
+                    //comprobamos si existe el equipo del piloto y si no existe lo creamos
+                    Equipo equipoPiloto = piloto.getEquipo();
+                    String insertarEquipo = "INSERT INTO constructors (constructorref, name, nationality, url) VALUES (?, ?, ?, ?) " +
+                            "ON CONFLICT (constructorid) DO NOTHING";
 
-            PreparedStatement sentenciaEquipo = conexion.prepareStatement(insertarEquipo, PreparedStatement.RETURN_GENERATED_KEYS);
+                    PreparedStatement sentenciaEquipo = conexion.prepareStatement(insertarEquipo, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            sentenciaEquipo.setString(1, equipoPiloto.getReferencia());
-            sentenciaEquipo.setString(2, equipoPiloto.getNombre());
-            sentenciaEquipo.setString(3, equipoPiloto.getNacionalidad());
-            sentenciaEquipo.setString(4, equipoPiloto.getUrl());
+                    sentenciaEquipo.setString(1, equipoPiloto.getReferencia());
+                    sentenciaEquipo.setString(2, equipoPiloto.getNombre());
+                    sentenciaEquipo.setString(3, equipoPiloto.getNacionalidad());
+                    sentenciaEquipo.setString(4, equipoPiloto.getUrl());
 
-            sentenciaEquipo.executeUpdate();
-            //obtenemos el id del equipo
-            ResultSet resultSet = sentenciaEquipo.getGeneratedKeys();
-            resultSet.next();
-            int idEquipo = resultSet.getInt(1);
+                    sentenciaEquipo.executeUpdate();
+                    //obtenemos el id del equipo
+                    ResultSet resultSet = sentenciaEquipo.getGeneratedKeys();
+                    resultSet.next();
+                    int idEquipo = resultSet.getInt(1);
 
-                System.out.println("El id del equipo es: " + idEquipo);
+                    System.out.println("El id del equipo es: " + idEquipo);
 
-            //insertamos el piloto
-            String insertarPiloto = "INSERT INTO drivers (code, forename, surname, dob, nationality, constructorid, url) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    //insertamos el piloto
+                    String insertarPiloto = "INSERT INTO drivers (code, forename, surname, dob, nationality, constructorid, url) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement sentenciaPiloto = conexion.prepareStatement(insertarPiloto);
-            sentenciaPiloto.setString(1, piloto.getCode());
-            sentenciaPiloto.setString(2, piloto.getNombre());
-            sentenciaPiloto.setString(3, piloto.getApodo());
-            sentenciaPiloto.setDate(4, new Date(piloto.getFechaNacimiento().getTime()));
-            sentenciaPiloto.setString(5, piloto.getNacionalidad());
-            sentenciaPiloto.setInt(6, idEquipo);
-            sentenciaPiloto.setString(7, piloto.getUrl());
+                    PreparedStatement sentenciaPiloto = conexion.prepareStatement(insertarPiloto);
+                    sentenciaPiloto.setString(1, piloto.getCode());
+                    sentenciaPiloto.setString(2, piloto.getNombre());
+                    sentenciaPiloto.setString(3, piloto.getApodo());
+                    sentenciaPiloto.setDate(4, new Date(piloto.getFechaNacimiento().getTime()));
+                    sentenciaPiloto.setString(5, piloto.getNacionalidad());
+                    sentenciaPiloto.setInt(6, idEquipo);
+                    sentenciaPiloto.setString(7, piloto.getUrl());
 
-            sentenciaPiloto.executeUpdate();
+                    sentenciaPiloto.executeUpdate();
+
+
+                }
 
             conexion.commit();
             conexion.setAutoCommit(true);
@@ -59,6 +64,5 @@ public class ConectarBaseDatos {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        System.out.println(piloto.getEquipo().getId());
     }
 }
