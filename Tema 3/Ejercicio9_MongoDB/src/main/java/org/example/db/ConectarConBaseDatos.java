@@ -70,4 +70,18 @@ public class ConectarConBaseDatos {
         }
     }
 
+    public static void borrarPiloto(Drivers driver){
+
+        try(MongoClient mongoClient = MongoClients.create(url)){
+            CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
+            CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
+
+            MongoDatabase database = mongoClient.getDatabase("f1-2006").withCodecRegistry(pojoCodecRegistry);
+            MongoCollection<Drivers> collection = database.getCollection("drivers", Drivers.class);
+
+            collection.deleteOne(eq("driverid", driver.getDriverid()));
+        }
+
+    }
+
 }

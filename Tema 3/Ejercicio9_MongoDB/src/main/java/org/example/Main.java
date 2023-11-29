@@ -15,5 +15,6 @@ public class Main {
         //ConectarConBaseDatos.buscarPilotoPorId(1);
         //ConectarConBaseDatos.todosLosPilotos();
         //ConectarConBaseDatos.actualizarPiloto(new Drivers("HAM", new Constructor("mercedes", "Mercedes", "German", "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"), LocalDate.of(1985, 1, 7), 1, "Lewis", "British", "Hamilton", "https://en.wikipedia.org/wiki/Lewis_Hamilton"));
+        //ConectarConBaseDatos.borrarPiloto(new Drivers("HAM", new Constructor("mercedes", "Mercedes", "German", "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"), LocalDate.of(1985, 1, 7), 1, "Lewis", "British", "Hamilton", "https://en.wikipedia.org/wiki/Lewis_Hamilton"));
     }
 }
