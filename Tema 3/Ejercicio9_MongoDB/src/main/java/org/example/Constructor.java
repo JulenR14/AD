@@ -1,16 +1,20 @@
 package org.example;
 
-public class Constructor {
-    private int constructorid;
-    private String constructorRef;
-    private String nombre;
-    private String nacionalidad;
-    private String url;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public Constructor(String constructorRef, String nombre, String nacionalidad, String url){
-        this.constructorRef = constructorRef;
-        this.nombre = nombre;
-        this.nacionalidad = nacionalidad;
+@Data
+@NoArgsConstructor
+public class Constructor {
+    String constructorref;
+    String name;
+    String nationality;
+    String url;
+
+    public Constructor(String constructorref, String name, String nationality, String url) {
+        this.constructorref = constructorref;
+        this.name = name;
+        this.nationality = nationality;
         this.url = url;
     }
 }
