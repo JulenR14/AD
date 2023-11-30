@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Calendar;
 
 
 @Data
@@ -32,5 +33,10 @@ public class Drivers {
         this.nationality = nationality;
         this.constructors = constructors;
         this.url = url;
+    }
+
+    public int getAgeIn2006() {
+        int birthYear = dob.getYear();
+        return 2006 - birthYear;
     }
 }
