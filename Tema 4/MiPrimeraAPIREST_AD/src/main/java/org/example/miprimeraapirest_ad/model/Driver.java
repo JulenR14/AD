@@ -1,4 +1,4 @@
-package org.example.miprimeraapirest_ad;
+package org.example.miprimeraapirest_ad.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -17,10 +17,10 @@ public class Driver {
     @Column(name = "driverid")
     private Long driverId;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "code")
+    private String code;
     private String forename;
     private String surname;
-    private String code;
     @JsonProperty("dateOfBirth")
     private LocalDate dob;
     private String nationality;
