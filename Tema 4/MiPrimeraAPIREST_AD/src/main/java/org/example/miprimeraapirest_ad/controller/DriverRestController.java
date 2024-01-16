@@ -1,5 +1,6 @@
 package org.example.miprimeraapirest_ad.controller;
 
+import jakarta.transaction.Transactional;
 import org.example.miprimeraapirest_ad.model.Driver;
 import org.example.miprimeraapirest_ad.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class DriverRestController {
         return ResponseEntity.ok(driver);
     }
 
+    @Transactional
     @DeleteMapping("/drivers/{code}")
     public ResponseEntity<Driver> deleteByCode(@PathVariable String code){
         this.driverService.deleteDriverByCode(code);
