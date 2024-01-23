@@ -1,5 +1,6 @@
 package org.julen.ejercicio13relaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,10 +14,10 @@ public class Circuit {
     @Column(name = "circuitid")
     private Long circuitId;
 
-    @Column(unique = true, name = "circuitref")
+    @Column(unique = true, name = "circuitref", nullable = false)
     private String circuitRef;
 
-    @Column(unique = true, name = "name")
+    @Column(unique = true, nullable = false)
     private String name;
 
     private String location;
@@ -27,5 +28,6 @@ public class Circuit {
     private String url;
 
     @OneToOne(mappedBy = "circuit")
+    @JsonIgnoreProperties("circuit")
     private Race race;
 }

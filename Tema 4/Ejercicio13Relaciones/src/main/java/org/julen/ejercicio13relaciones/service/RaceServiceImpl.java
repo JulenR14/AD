@@ -17,15 +17,17 @@ public class RaceServiceImpl implements RaceService{
     public RaceServiceImpl(RaceRepository raceService){
         this.repository = raceService;
     }
+
+    @Override
+    public Optional<Race> findByRound(int round) {
+        return repository.findByRound(round);
+    }
+
     @Override
     public List<Race> getAllRaces() {
         return repository.findAll();
     }
 
-    @Override
-    public Optional<Race> getRaceByCode(String code) {
-        return repository.findByCodeIgnoreCase(code);
-    }
 
     @Override
     public void saveRace(Race race) {
@@ -33,7 +35,8 @@ public class RaceServiceImpl implements RaceService{
     }
 
     @Override
-    public void deleteRaceByCode(String code) {
-        repository.deleteByCode(code);
+    public void deleteRaceByRound(int round) {
+        repository.deleteByRound(round);
     }
+
 }

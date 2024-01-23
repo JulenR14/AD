@@ -1,8 +1,8 @@
 package org.julen.ejercicio13relaciones.controller;
 
 import jakarta.transaction.Transactional;
-import org.apache.coyote.Response;
-import org.julen.ejercicio13relaciones.model.Driver;
+
+
 import org.julen.ejercicio13relaciones.model.Race;
 import org.julen.ejercicio13relaciones.service.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class RiceRestController {
-
+public class RaceRestController {
+    
     private final RaceService raceService;
 
     @Autowired
-    public RiceRestController(RaceService raceService){
+    public RaceRestController(RaceService raceService){
         this.raceService = raceService;
     }
 
@@ -27,9 +27,9 @@ public class RiceRestController {
         return ResponseEntity.ok(raceService.getAllRaces());
     }
 
-    @GetMapping("/races/{code}")
-    public ResponseEntity<Race> getByCode(@PathVariable String code){
-        return this.raceService.getRaceByCode(code)
+    @GetMapping("/races/{round}")
+    public ResponseEntity<Race> getByCode(@PathVariable int round){
+        return this.raceService.findByRound(round)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -50,9 +50,9 @@ public class RiceRestController {
     }
 
     @Transactional
-    @DeleteMapping("/races/{code}")
-    public ResponseEntity<Race> deleteByCode(@PathVariable String code){
-        this.raceService.deleteRaceByCode(code);
+    @DeleteMapping("/races/{round}")
+    public ResponseEntity<Race> deleteByCode(@PathVariable int round){
+        this.raceService.deleteRaceByRound(round);
         return ResponseEntity.ok().build();
     }
 }

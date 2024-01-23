@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RaceService {
+
+    Optional<Race> findByRound(int round);
     List<Race> getAllRaces();
-    Optional<Race> getRaceByCode(String code);
     void saveRace(Race race);
 
-    void deleteRaceByCode(String code);
+    void deleteRaceByRound(int round);
+
 }
