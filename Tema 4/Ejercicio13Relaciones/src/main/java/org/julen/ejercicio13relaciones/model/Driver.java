@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Generated;
 
 import java.time.LocalDate;
 
@@ -29,7 +28,7 @@ public class Driver {
     @ManyToOne
     @JoinColumn(name = "constructorid")
     @JsonIgnoreProperties("drivers")
-    private Contructor constructor;
+    private Constructor constructor;
 
 //    @Column(name = "constructorid")
 //    private int constructorId;
