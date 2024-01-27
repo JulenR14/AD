@@ -1,11 +1,13 @@
 package org.julen.ejercicio13relaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -30,9 +32,10 @@ public class Driver {
     @JsonIgnoreProperties("drivers")
     private Constructor constructor;
 
-//    @Column(name = "constructorid")
-//    private int constructorId;
     private String url;
 
+    @OneToMany(mappedBy = "driver")
+    @JsonBackReference
+    private Set<Result> results;
 
 }

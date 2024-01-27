@@ -1,11 +1,13 @@
 package org.julen.ejercicio13relaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,7 +27,6 @@ public class Race {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties("race")
-    @JoinColumn(name = "circuitid")
     private Circuit circuit;
 
     @Column(unique = true, nullable = false)
@@ -38,4 +39,8 @@ public class Race {
     private LocalTime time;
 
     private String url;
+
+    @OneToMany(mappedBy = "race")
+    @JsonBackReference
+    private Set<Result> results;
 }
