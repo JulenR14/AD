@@ -1,5 +1,6 @@
 package org.julen.ejercicio13relaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class Result {
 
     @ManyToOne
     @JoinColumn(name = "driverid")
-    @JsonManagedReference
+    @JsonIgnoreProperties("results")
     private Driver driver;
 
     private int grid;

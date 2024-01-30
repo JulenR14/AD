@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,7 +36,6 @@ public class Driver {
     private String url;
 
     @OneToMany(mappedBy = "driver")
-    @JsonBackReference
-    private Set<Result> results;
+    private List<Result> results;
 
 }
