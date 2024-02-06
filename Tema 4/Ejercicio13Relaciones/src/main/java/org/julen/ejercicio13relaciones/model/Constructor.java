@@ -25,7 +25,7 @@ public class Constructor {
     private String nationality;
     private String url;
 
-    @OneToMany(mappedBy = "constructor" , cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("constructor")
-    private List<Driver> drivers;
+//    @OneToMany(mappedBy = "constructor" , cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties("constructor")
+//    private List<Driver> drivers;
 }
