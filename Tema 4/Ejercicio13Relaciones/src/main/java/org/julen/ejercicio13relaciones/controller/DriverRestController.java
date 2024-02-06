@@ -3,6 +3,7 @@ package org.julen.ejercicio13relaciones.controller;
 import jakarta.transaction.Transactional;
 
 import org.julen.ejercicio13relaciones.model.Driver;
+import org.julen.ejercicio13relaciones.model.DriverDTO;
 import org.julen.ejercicio13relaciones.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class DriverRestController {
     }
 
     @GetMapping("/drivers")
-    public ResponseEntity<List<Driver>> getAll(){
+    public ResponseEntity<List<DriverDTO>> getAll(){
         return ResponseEntity.ok(driverService.getAllDrivers());
     }
 
