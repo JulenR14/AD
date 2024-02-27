@@ -10,9 +10,19 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "races")
+@NoArgsConstructor
 public class Race {
 
     @Id
@@ -26,12 +36,7 @@ public class Race {
     @Column(nullable = false)
     private int round;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "circuitid")
-    @JsonIgnoreProperties("race")
-    private Circuit circuit;
-
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -42,6 +47,11 @@ public class Race {
 
     private String url;
 
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "circuitid")
+    @JsonIgnoreProperties("race")
+    private Circuit circuit;
+
     @OneToMany(mappedBy = "race")
-    private List<Result> results;
+    private List<Result> resultList;
 }
